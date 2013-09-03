@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<service xmlns="http://www.activegrid.com/namespaces/ServiceDefinitions/1.0" springFile="s3119b.spring.xml" type="JavaService" CRUDService="false" class="c3119b" id="s3119b">
+    <operation name="getReport">
+        <parameter isList="false" typeRef="java.lang.String" name="idGrado"/>
+        <parameter isList="false" typeRef="java.lang.String" name="fecha"/>
+        <parameter isList="false" typeRef="java.lang.String" name="Grado"/>
+        <return isList="false" typeRef="com.wavemaker.runtime.server.DownloadResponse"/>
+    </operation>
+    <dataobjects/>
+</service>

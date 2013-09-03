@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporte_316" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="CODIGO" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="idsy" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     PERSONA.`Apellido1` AS PERSONA_Apellido1,
+     PERSONA.`Apellido2` AS PERSONA_Apellido2,
+     PERSONA.`Nombre1` AS PERSONA_Nombre1,
+     PERSONA.`Nombre2` AS PERSONA_Nombre2,
+     PERSONA.`Codigo` AS PERSONA_Codigo,
+     asignatura.`Asignatura` AS asignatura_Asignatura,
+     Insc_Alum_Asig.`calif_char` AS Insc_Alum_Asig_calif_char,
+     Insc_Alum_Asig.`Calificacion` AS Insc_Alum_Asig_Calificacion,
+     Promocion.`commentcomite` AS Promocion_commentcomite,
+     Promocion.`commentfinanc` AS Promocion_commentfinanc,
+     Promocion.`promovido` AS Promocion_promovido,
+     Promocion.`commentaprobado` AS Promocion_commentaprobado,
+     Promocion.`commentpromovido` AS Promocion_commentpromovido,
+     Promocion.`calificacion` AS Promocion_calificacion,
+     Promocion.`calificacion_char` AS Promocion_calificacion_char,
+     SY.`School_year` AS SY_School_year,
+     Promocion.`aprobado` AS Promocion_aprobado,
+     Promocion.`autorizado_academico` AS Promocion_autorizado_academico,
+     Promocion.`autorizado_financiera` AS Promocion_autorizado_financiera,
+     Promocion.`autorizado_prom_anticipada` AS Promocion_autorizado_prom_anticipada,
+     asignatura.`SY_Id_SY` AS asignatura_SY_Id_SY
+FROM
+     `PERSONA` PERSONA INNER JOIN `Insc_Alum_Asig` Insc_Alum_Asig ON PERSONA.`Id_Persona` = Insc_Alum_Asig.`Persona_Id_Persona`
+     INNER JOIN `asignatura` asignatura ON Insc_Alum_Asig.`Asignatura_Id_Asignatura` = asignatura.`Id_Asignatura`
+     INNER JOIN `SY` SY ON asignatura.`SY_Id_SY` = SY.`Id_SY`
+     INNER JOIN `Promocion` Promocion ON SY.`Id_SY` = Promocion.`SY_Id_Sy`
+     AND PERSONA.`Id_Persona` = Promocion.`Persona_Id_Persona`
+WHERE
+     PERSONA.Id_Persona = $P{CODIGO} AND asignatura.`SY_Id_SY`= $P{idsy}]]>
+	</queryString>
+	<field name="PERSONA_Apellido1" class="java.lang.String"/>
+	<field name="PERSONA_Apellido2" class="java.lang.String"/>
+	<field name="PERSONA_Nombre1" class="java.lang.String"/>
+	<field name="PERSONA_Nombre2" class="java.lang.String"/>
+	<field name="PERSONA_Codigo" class="java.lang.String"/>
+	<field name="asignatura_Asignatura" class="java.lang.String"/>
+	<field name="Insc_Alum_Asig_calif_char" class="java.lang.String"/>
+	<field name="Insc_Alum_Asig_Calificacion" class="java.math.BigDecimal"/>
+	<field name="Promocion_commentcomite" class="java.lang.String"/>
+	<field name="Promocion_commentfinanc" class="java.lang.String"/>
+	<field name="Promocion_promovido" class="java.lang.Boolean"/>
+	<field name="Promocion_commentaprobado" class="java.lang.String"/>
+	<field name="Promocion_commentpromovido" class="java.lang.String"/>
+	<field name="Promocion_calificacion" class="java.lang.Float"/>
+	<field name="Promocion_calificacion_char" class="java.lang.String"/>
+	<field name="SY_School_year" class="java.lang.String"/>
+	<field name="Promocion_aprobado" class="java.lang.Boolean"/>
+	<field name="Promocion_autorizado_academico" class="java.lang.Boolean"/>
+	<field name="Promocion_autorizado_financiera" class="java.lang.Boolean"/>
+	<field name="Promocion_autorizado_prom_anticipada" class="java.lang.Boolean"/>
+	<field name="asignatura_SY_Id_SY" class="java.lang.Integer"/>
+	<group name="PERSONA_Codigo">
+		<groupExpression><![CDATA[$F{PERSONA_Codigo}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="34" splitType="Stretch">
+			<textField>
+				<reportElement x="445" y="12" width="100" height="20" forecolor="#CC0000"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{SY_School_year}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="445" y="0" width="100" height="12"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[AÑO ESCOLAR]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="37" splitType="Stretch">
+			<staticText>
+				<reportElement x="14" y="0" width="531" height="17"/>
+				<textElement/>
+				<text><![CDATA[Este reporte muestra información de calificaciones finales de asignatura, area y grado para el estudiante.]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="14" y="17" width="486" height="20" forecolor="#CC0000"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{PERSONA_Apellido1}+" "+$F{PERSONA_Apellido2}+" "+$F{PERSONA_Nombre1}+" "+$F{PERSONA_Nombre2}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="12" splitType="Stretch">
+			<staticText>
+				<reportElement x="14" y="0" width="100" height="12"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ASIGNATURA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="284" y="0" width="100" height="12"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CALIFICACIÓN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="400" y="0" width="100" height="12"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[PUNTAJE]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="12" splitType="Stretch">
+			<textField>
+				<reportElement x="25" y="0" width="239" height="12"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{asignatura_Asignatura}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="284" y="0" width="100" height="12"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Insc_Alum_Asig_calif_char}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="400" y="0" width="100" height="12"/>
+				<textElement/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{Insc_Alum_Asig_Calificacion}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="99" splitType="Stretch">
+			<staticText>
+				<reportElement x="25" y="2" width="301" height="17"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[INFORMACIÓN DEL COMITÉ DE PROMOCIÓN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="333" y="2" width="212" height="17"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[COMENTARIOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="53" y="39" width="182" height="20" forecolor="#0033FF"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[PROMOVIDO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="53" y="19" width="182" height="20" forecolor="#0033FF"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[APROBADO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="53" y="59" width="182" height="20" forecolor="#0033FF"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[AUTORIZADO PARA MATRICULA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="53" y="79" width="182" height="20" forecolor="#0033FF"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[AUTORIZADO FINANCIERAMENTE]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="333" y="19" width="212" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Promocion_commentaprobado}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="333" y="39" width="212" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Promocion_commentpromovido}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="333" y="59" width="212" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Promocion_commentcomite}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="333" y="79" width="212" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Promocion_commentfinanc}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="246" y="59" width="80" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Boolean"><![CDATA[$F{Promocion_autorizado_academico}.equals()==true?"Si":"No"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="246" y="19" width="80" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Boolean"><![CDATA[$F{Promocion_aprobado}.equals()== false ?"Si":"No"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="246" y="39" width="80" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Boolean"><![CDATA[$F{Promocion_promovido}.equals()==true?"Si":"No"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="246" y="79" width="80" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Boolean"><![CDATA[$F{Promocion_autorizado_financiera}.equals()==true?"Si":"No"]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

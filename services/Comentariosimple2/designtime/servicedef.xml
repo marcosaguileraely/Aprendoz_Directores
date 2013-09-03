@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<service xmlns="http://www.activegrid.com/namespaces/ServiceDefinitions/1.0" springFile="Comentariosimple2.spring.xml" type="JavaService" CRUDService="false" class="Comentariosimple2" id="Comentariosimple2">
+    <operation name="getReport">
+        <parameter isList="false" typeRef="java.lang.String" name="idPersonacs"/>
+        <parameter isList="false" typeRef="java.lang.String" name="sycs"/>
+        <parameter isList="false" typeRef="java.lang.String" name="com1"/>
+        <parameter isList="false" typeRef="java.lang.String" name="com2"/>
+        <return isList="false" typeRef="com.wavemaker.runtime.server.DownloadResponse"/>
+    </operation>
+    <dataobjects/>
+</service>

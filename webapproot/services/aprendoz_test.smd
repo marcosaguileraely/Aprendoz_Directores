@@ -1,0 +1,209 @@
+{
+	"methods": [{
+		"name": "actualizarClave",
+		"parameters": [{
+			"name": "clave",
+			"type": "java.lang.String"
+		}, {
+			"name": "usuario",
+			"type": "java.lang.String"
+		}],
+		"returnType": "java.lang.Integer"
+	}, {
+		"name": "complexSendMail",
+		"parameters": [{
+			"name": "ide",
+			"type": "java.lang.Integer"
+		}],
+		"returnType": "[com.aprendoz_test.data.output.ComplexSendMailRtnType]"
+	}, {
+		"name": "crearPlan",
+		"parameters": [{
+			"name": "p1",
+			"type": "java.lang.String"
+		}, {
+			"name": "p2",
+			"type": "java.lang.String"
+		}, {
+			"name": "p3",
+			"type": "java.lang.String"
+		}, {
+			"name": "fecha_plan",
+			"type": "java.util.Date"
+		}, {
+			"name": "id",
+			"type": "java.lang.Integer"
+		}],
+		"returnType": "java.lang.Integer"
+	}, {
+		"name": "deleteEventualidadPersona",
+		"parameters": [{
+			"name": "epid",
+			"type": "java.lang.Integer"
+		}],
+		"returnType": "java.lang.Integer"
+	}, {
+		"name": "deleteSubject",
+		"parameters": [{
+			"name": "idasignatura",
+			"type": "java.lang.Integer"
+		}],
+		"returnType": "java.lang.Integer"
+	}, {
+		"name": "enviarMailEventualidades",
+		"parameters": [{
+			"name": "ide",
+			"type": "java.lang.Integer"
+		}],
+		"returnType": "[com.aprendoz_test.data.output.EnviarMailEventualidadesRtnType]"
+	}, {
+		"name": "getCountGender",
+		"parameters": [{
+			"name": "sy",
+			"type": "java.lang.Integer"
+		}, {
+			"name": "curso",
+			"type": "java.lang.Integer"
+		}],
+		"returnType": "com.aprendoz_test.data.output.GetCountGenderRtnType"
+	}, {
+		"name": "getCountGenderFemale",
+		"parameters": [{
+			"name": "sy",
+			"type": "java.lang.Integer"
+		}, {
+			"name": "curso",
+			"type": "java.lang.Integer"
+		}],
+		"returnType": "com.aprendoz_test.data.output.GetCountGenderFemaleRtnType"
+	}, {
+		"name": "getCountGenderMale",
+		"parameters": [{
+			"name": "sy",
+			"type": "java.lang.Integer"
+		}, {
+			"name": "curso",
+			"type": "java.lang.Integer"
+		}],
+		"returnType": "com.aprendoz_test.data.output.GetCountGenderMaleRtnType"
+	}, {
+		"name": "getFullName",
+		"parameters": [{
+			"name": "usuario",
+			"type": "java.lang.String"
+		}],
+		"returnType": "com.aprendoz_test.data.output.GetFullNameRtnType"
+	}, {
+		"name": "getInscAlumActividadById",
+		"parameters": [{
+			"name": "id",
+			"type": "java.lang.Integer"
+		}],
+		"returnType": "com.aprendoz_test.data.InscAlumActividad"
+	}, {
+		"name": "getMaxSubjectByGrade",
+		"parameters": [{
+			"name": "idgrado",
+			"type": "java.lang.Integer"
+		}, {
+			"name": "idsy",
+			"type": "java.lang.Integer"
+		}],
+		"returnType": "[com.aprendoz_test.data.output.GetMaxSubjectByGradeRtnType]"
+	}, {
+		"name": "getTipoEventualidadByIdSubTipo",
+		"parameters": [{
+			"name": "id",
+			"type": "java.lang.Integer"
+		}],
+		"returnType": "[com.aprendoz_test.data.output.GetTipoEventualidadByIdSubTipoRtnType]"
+	}, {
+		"name": "getTypeUser",
+		"parameters": [{
+			"name": "usuario",
+			"type": "java.lang.String"
+		}],
+		"returnType": "com.aprendoz_test.data.output.GetTypeUserRtnType"
+	}, {
+		"name": "hQLlsCursos",
+		"parameters": null,
+		"returnType": "[com.aprendoz_test.data.output.HQLlsCursosRtnType]"
+	}, {
+		"name": "hQLlsGrado",
+		"parameters": null,
+		"returnType": "[com.aprendoz_test.data.output.HQLlsGradoRtnType]"
+	}, {
+		"name": "hQLlsPeriodo",
+		"parameters": null,
+		"returnType": "[com.aprendoz_test.data.output.HQLlsPeriodoRtnType]"
+	}, {
+		"name": "hqlPersonaEventualidad",
+		"parameters": [{
+			"name": "ide",
+			"type": "java.lang.Integer"
+		}],
+		"returnType": "[com.aprendoz_test.data.output.HqlPersonaEventualidadRtnType]"
+	}, {
+		"name": "hql_tipo_eventualidad",
+		"parameters": null,
+		"returnType": "[com.aprendoz_test.data.output.Hql_tipo_eventualidadRtnType]"
+	}, {
+		"name": "last_accessHQL",
+		"parameters": [{
+			"name": "user",
+			"type": "java.lang.String"
+		}],
+		"returnType": "[com.aprendoz_test.data.output.Last_accessHQLRtnType]"
+	}, {
+		"name": "lsCursos",
+		"parameters": null,
+		"returnType": "[com.aprendoz_test.data.output.LsCursosRtnType]"
+	}, {
+		"name": "seachEventualidadHQL",
+		"parameters": [{
+			"name": "search",
+			"type": "java.lang.String"
+		}],
+		"returnType": "[com.aprendoz_test.data.output.SeachEventualidadHQLRtnType]"
+	}, {
+		"name": "searchReportesAlumnos",
+		"parameters": [{
+			"name": "search",
+			"type": "java.lang.String"
+		}],
+		"returnType": "[com.aprendoz_test.data.output.SearchReportesAlumnosRtnType]"
+	}, {
+		"name": "sendMailHQL",
+		"parameters": [{
+			"name": "ide",
+			"type": "java.lang.Integer"
+		}],
+		"returnType": "[com.aprendoz_test.data.output.SendMailHQLRtnType]"
+	}, {
+		"name": "showInformationUser",
+		"parameters": [{
+			"name": "user",
+			"type": "java.lang.String"
+		}],
+		"returnType": "[com.aprendoz_test.data.output.ShowInformationUserRtnType]"
+	}, {
+		"name": "subjectDetails",
+		"parameters": [{
+			"name": "idasignatura",
+			"type": "java.lang.Integer"
+		}],
+		"returnType": "[com.aprendoz_test.data.output.SubjectDetailsRtnType]"
+	}, {
+		"name": "subjectsByGrade",
+		"parameters": [{
+			"name": "_sy",
+			"type": "java.lang.Integer"
+		}, {
+			"name": "_grado",
+			"type": "java.lang.Integer"
+		}],
+		"returnType": "[com.aprendoz_test.data.output.SubjectsByGradeRtnType]"
+	}],
+	"serviceType": "JSON-RPC",
+	"serviceURL": "aprendoz_test.json"
+}

@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="calificacionesasignaturaestudiante" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="codigo" class="java.lang.Integer"/>
+	<parameter name="idsy" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     PERSONA.`Apellido1` AS PERSONA_Apellido1,
+     PERSONA.`Apellido2` AS PERSONA_Apellido2,
+     PERSONA.`Nombre2` AS PERSONA_Nombre2,
+     PERSONA.`Nombre1` AS PERSONA_Nombre1,
+     PERSONA.`Id_Persona` AS PERSONA_Id_Persona,
+     PERSONA.`Codigo` AS PERSONA_Codigo,
+     Insc_Alum_Asig.`calif_char` AS Insc_Alum_Asig_calif_char,
+     Insc_Alum_Asig.`Calificacion` AS Insc_Alum_Asig_Calificacion,
+     asignatura.`Asignatura` AS asignatura_Asignatura,
+     Insc_Alum_Asig.`Periodo_Id_Periodo` AS Insc_Alum_Asig_Periodo_Id_Periodo,
+     SY.`Id_SY` AS SY_Id_SY,
+     SY.`School_year` AS SY_School_year
+FROM
+     `PERSONA` PERSONA INNER JOIN `Insc_Alum_Asig` Insc_Alum_Asig ON PERSONA.`Id_Persona` = Insc_Alum_Asig.`Persona_Id_Persona`
+     INNER JOIN `asignatura` asignatura ON Insc_Alum_Asig.`Asignatura_Id_Asignatura` = asignatura.`Id_Asignatura`
+     INNER JOIN `SY` SY ON asignatura.`SY_Id_SY` = SY.`Id_SY`
+WHERE
+     Persona.codigo = $P{codigo} AND
+     SY.Id_SY=$P{idsy}]]>
+	</queryString>
+	<field name="PERSONA_Apellido1" class="java.lang.String"/>
+	<field name="PERSONA_Apellido2" class="java.lang.String"/>
+	<field name="PERSONA_Nombre2" class="java.lang.String"/>
+	<field name="PERSONA_Nombre1" class="java.lang.String"/>
+	<field name="PERSONA_Id_Persona" class="java.lang.Integer"/>
+	<field name="PERSONA_Codigo" class="java.lang.String"/>
+	<field name="Insc_Alum_Asig_calif_char" class="java.lang.String"/>
+	<field name="Insc_Alum_Asig_Calificacion" class="java.math.BigDecimal"/>
+	<field name="asignatura_Asignatura" class="java.lang.String"/>
+	<field name="Insc_Alum_Asig_Periodo_Id_Periodo" class="java.lang.Integer"/>
+	<field name="SY_Id_SY" class="java.lang.Integer"/>
+	<field name="SY_School_year" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="113" splitType="Stretch">
+			<staticText>
+				<reportElement x="101" y="13" width="289" height="33"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[COLEGIO ROCHESTER]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="461" y="46" width="93" height="13"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Aprendoz Rochester©]]></text>
+			</staticText>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="463" y="60" width="86" height="13"/>
+				<textElement>
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="25" y="90" width="529" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{PERSONA_Apellido1} + "   "+$F{PERSONA_Apellido2} +"   "+$F{PERSONA_Nombre1}+"   "+$F{PERSONA_Nombre2}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="25" y="76" width="324" height="13"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre completo del estudiante]]></text>
+			</staticText>
+			<image>
+				<reportElement x="452" y="5" width="99" height="50"/>
+				<imageExpression class="java.lang.String"><![CDATA["LOGO APRENDOZ.jpg"]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="1" y="3" width="76" height="68"/>
+				<imageExpression class="java.lang.String"><![CDATA["Logo 2 - Colegio Rochester.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="103" y="51" width="62" height="18"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Periodo escolar:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="166" y="51" width="132" height="18"/>
+				<textElement verticalAlignment="Middle">
+					<font size="13" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{SY_School_year}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="27" splitType="Stretch">
+			<rectangle radius="1">
+				<reportElement x="7" y="3" width="542" height="20" forecolor="#CCCCCC" backcolor="#CCCCCC"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="25" y="4" width="314" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ASIGNATURA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="352" y="4" width="62" height="20"/>
+				<textElement/>
+				<text><![CDATA[Puntaje]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="428" y="4" width="110" height="20"/>
+				<textElement/>
+				<text><![CDATA[Calificación ]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="28" splitType="Stretch">
+			<textField>
+				<reportElement x="25" y="3" width="314" height="21"/>
+				<textElement>
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{asignatura_Asignatura}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="352" y="4" width="62" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{Insc_Alum_Asig_Calificacion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="428" y="3" width="110" height="21"/>
+				<textElement>
+					<font isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Insc_Alum_Asig_calif_char}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="7" y="2" width="544" height="1"/>
+			</line>
+			<line>
+				<reportElement x="7" y="26" width="544" height="1"/>
+			</line>
+			<line>
+				<reportElement x="7" y="3" width="1" height="24"/>
+			</line>
+			<line>
+				<reportElement x="550" y="3" width="1" height="24"/>
+			</line>
+			<line>
+				<reportElement x="422" y="3" width="1" height="24"/>
+			</line>
+			<line>
+				<reportElement x="344" y="2" width="1" height="24"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="13" splitType="Stretch">
+			<staticText>
+				<reportElement x="8" y="0" width="292" height="13"/>
+				<textElement/>
+				<text><![CDATA[ © Derechos Reservados de Reproducción del Colegio Rochester]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

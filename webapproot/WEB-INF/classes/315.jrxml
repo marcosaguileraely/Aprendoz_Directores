@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="315-3" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<parameter name="idSY" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT P.Id_Persona AS ALUMNO, P.NOMBRE1, REPLACE(P.Nombre2, '-','') Nombre2, P.APELLIDO1, P.Apellido2, G.Grado, C.Curso
+     , A.Id_Area, A.Area, ASI.Id_Asignatura, ASI.Asignatura, IA.Calificacion AS CAL_ASIGNATURA
+     , PER.periodo, ASI.intensidad_horaria AS INTENSIDAD, IA.CALIF_CHAR
+
+, INTENSIDAD_HORARIA_AREA (A.ID_AREA, P.ID_PERSONA, 1) AS SUMINTENSIDAD
+, replace(calcula_calif_area_char(P.ID_PERSONA, A.ID_AREA),'BASICO','BÁSICO')AS CALIF_AREA_CHAR
+, (calcula_calif_area_num(P.ID_PERSONA, A.ID_AREA)*100) AS CALIF_AREA_NUM
+
+ FROM PERSONA P, Insc_Alum_Curso IC, GRADO G, CURSO C
+   , AREA A, ASIGNATURA ASI, Insc_Alum_Asig IA
+   , SY, PERIODO PER
+ WHERE P.Id_Persona = IC.Persona_Id_Persona
+  AND G.Id_Grado = C.Grado_Id_Grado
+  AND C.Id_Curso = IC.Curso_Id_Curso
+  AND IC.SY_Id_SY = SY.Id_SY
+  AND (   A.Id_Area = ASI.Id_Area1
+     OR A.Id_Area = ASI.Id_Area2
+     OR A.Id_Area = ASI.Id_Area3)
+  AND P.Id_Persona = IA.Persona_Id_Persona
+  AND ASI.Id_Asignatura = IA.Asignatura_Id_Asignatura
+  AND IA.Periodo_Id_Periodo = PER.Id_Periodo
+  AND SY.Id_SY = PER.SY_Id_SY
+  AND P.Id_Persona
+  AND SY.Id_SY
+  AND IA.CALIFICACION IS NOT NULL
+
+ORDER BY P.NOMBRE1, P.Nombre2, P.APELLIDO1, P.Apellido2, G.Grado, C.Curso
+       , A.Area, ASI.Asignatura]]>
+	</queryString>
+	<field name="ALUMNO" class="java.lang.Integer"/>
+	<field name="NOMBRE1" class="java.lang.String"/>
+	<field name="Nombre2" class="java.lang.String"/>
+	<field name="APELLIDO1" class="java.lang.String"/>
+	<field name="Apellido2" class="java.lang.String"/>
+	<field name="Grado" class="java.lang.String"/>
+	<field name="Curso" class="java.lang.String"/>
+	<field name="Area" class="java.lang.String"/>
+	<field name="Asignatura" class="java.lang.String"/>
+	<field name="CAL_ASIGNATURA" class="java.math.BigDecimal"/>
+	<field name="periodo" class="java.lang.String"/>
+	<field name="INTENSIDAD" class="java.lang.Float"/>
+	<field name="CALIF_CHAR" class="java.lang.String"/>
+	<field name="CALIF_AREA_NUM" class="java.lang.Double"/>
+	<group name="ALUMNO">
+		<groupExpression><![CDATA[$F{ALUMNO}]]></groupExpression>
+		<groupHeader>
+			<band height="41">
+				<textField>
+					<reportElement style="SubTitle" x="215" y="13" width="193" height="24" forecolor="#000000"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Integer"><![CDATA[$F{ALUMNO}]]></textFieldExpression>
+				</textField>
+				<rectangle>
+					<reportElement mode="Opaque" x="0" y="13" width="36" height="24" forecolor="#CCCCCC" backcolor="#CCCCCC"/>
+				</rectangle>
+				<staticText>
+					<reportElement x="43" y="13" width="172" height="28"/>
+					<textElement>
+						<font fontName="Arial" size="18"/>
+					</textElement>
+					<text><![CDATA[CODIGO ALUMNO]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="6"/>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="70" splitType="Stretch">
+			<staticText>
+				<reportElement style="Title" x="268" y="12" width="263" height="33"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[LIBRO FINAL]]></text>
+			</staticText>
+			<image>
+				<reportElement x="602" y="0" width="202" height="45"/>
+				<imageExpression class="java.lang.String"><![CDATA["LOGO APRENDOZ.jpg"]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="0" y="0" width="257" height="70"/>
+				<imageExpression class="java.lang.String"><![CDATA["Logo 2 - Colegio Rochester.png"]]></imageExpression>
+			</image>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement style="Column header" x="605" y="50" width="197" height="20"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="36" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="35" width="555" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="0" y="19" width="70" height="15"/>
+				<textElement/>
+				<text><![CDATA[NOMBRES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="70" y="19" width="73" height="15"/>
+				<textElement/>
+				<text><![CDATA[APELLIDOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="144" y="19" width="53" height="16"/>
+				<textElement/>
+				<text><![CDATA[GRADO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="215" y="19" width="53" height="15"/>
+				<textElement/>
+				<text><![CDATA[CURSO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="282" y="19" width="42" height="15"/>
+				<textElement/>
+				<text><![CDATA[AREA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="367" y="19" width="87" height="15"/>
+				<textElement/>
+				<text><![CDATA[ASIGNATURA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="519" y="19" width="83" height="15"/>
+				<textElement/>
+				<text><![CDATA[INTENSIDAD]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="602" y="19" width="94" height="15"/>
+				<textElement/>
+				<text><![CDATA[CALIFICACION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="696" y="19" width="106" height="15"/>
+				<textElement/>
+				<text><![CDATA[CALIFICACION %]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="15" width="555" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement style="Detail" x="0" y="0" width="71" height="15"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{NOMBRE1}+""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="71" y="0" width="73" height="15"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{APELLIDO1}+" "+$F{Apellido2}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="144" y="1" width="71" height="15"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Grado}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="282" y="0" width="85" height="15"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Area}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="366" y="1" width="147" height="15"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Asignatura}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="553" y="1" width="49" height="15"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Float"><![CDATA[$F{INTENSIDAD}]]></textFieldExpression>
+			</textField>
+			<textField pattern="##,##0 %" isBlankWhenNull="true">
+				<reportElement style="Detail" x="696" y="0" width="106" height="15"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{CALIF_AREA_NUM}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="602" y="1" width="94" height="15"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{CALIF_CHAR}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="215" y="1" width="67" height="15"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Curso}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement style="Column header" x="684" y="0" width="80" height="20"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement style="Column header" x="764" y="0" width="40" height="20"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="7" width="324" height="13"/>
+				<textElement/>
+				<text><![CDATA[ © Derechos Reservados de Reproducción del Colegio Rochester]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,584 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="3113a" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="468"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
+	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true" pdfFontName="Times-Roman"/>
+	<style name="Detail" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman"/>
+	<style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#F0EFEF"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="idSY" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="idGR" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     SY.`Id_SY` AS SY_Id_SY,
+     SY.`School_year` AS SY_School_year,
+     Grado.`Id_Grado` AS Grado_Id_Grado,
+     Grado.`Grado` AS Grado_Grado,
+     Curso.`Id_Curso` AS Curso_Id_Curso,
+     Curso.`Curso` AS Curso_Curso,
+     Curso.`Grado_Id_Grado` AS Curso_Grado_Id_Grado,
+     asignatura.`Id_Asignatura` AS asignatura_Id_Asignatura,
+     asignatura.`Asignatura` AS asignatura_Asignatura,
+     asignatura.`Subject` AS asignatura_Subject,
+     asignatura.`Grado_Id_Grado` AS asignatura_Grado_Id_Grado,
+     asignatura.`SY_Id_SY` AS asignatura_SY_Id_SY,
+     Unidad.`Id_Unidad` AS Unidad_Id_Unidad,
+     Unidad.`Unidad` AS Unidad_Unidad,
+     Unidad.`Unit` AS Unidad_Unit,
+     Unidad.`Fecha_Inicio` AS Unidad_Fecha_Inicio,
+     Unidad.`Fecha_Fin` AS Unidad_Fecha_Fin,
+     Unidad.`Asignatura_Id_Asignatura` AS Unidad_Asignatura_Id_Asignatura,
+     Subtopico.`Id_Subtopico` AS Subtopico_Id_Subtopico,
+     Subtopico.`Subtopico` AS Subtopico_Subtopico,
+     Subtopico.`Unidad_Id_Unidad` AS Subtopico_Unidad_Id_Unidad,
+     Subtopico.`Fecha_inicio` AS Subtopico_Fecha_inicio,
+     Subtopico.`Fecha_Fin` AS Subtopico_Fecha_Fin,
+     Subtopico.`Subtopic` AS Subtopico_Subtopic,
+     Subtopico.`Numero_Subtopico` AS Subtopico_Numero_Subtopico,
+     Aprendizaje.`Id_Aprendizaje` AS Aprendizaje_Id_Aprendizaje,
+     Aprendizaje.`Fecha_Esperada` AS Aprendizaje_Fecha_Esperada,
+     Aprendizaje.`Aprendizaje` AS Aprendizaje_Aprendizaje,
+     Aprendizaje.`Learning` AS Aprendizaje_Learning,
+     Aprendizaje.`Peso` AS Aprendizaje_Peso,
+     Aprendizaje.`Dimension_Comprension_Id_Dimension` AS Aprendizaje_Dimension_Comprension_Id_Dimension,
+     Aprendizaje.`Inteligencia_Id_Inteligencia` AS Aprendizaje_Inteligencia_Id_Inteligencia,
+     Aprendizaje.`Nivel_Esperado_Id_Nivel_Esperado` AS Aprendizaje_Nivel_Esperado_Id_Nivel_Esperado,
+     Aprendizaje.`Dimension_Curricular_Id_Dimension` AS Aprendizaje_Dimension_Curricular_Id_Dimension,
+     Aprendizaje.`Eje_Id_Eje` AS Aprendizaje_Eje_Id_Eje,
+     Aprendizaje.`Subtopico_Id_Subtopico` AS Aprendizaje_Subtopico_Id_Subtopico,
+     Aprendizaje.`eje2_id_eje` AS Aprendizaje_eje2_id_eje,
+     Aprendizaje.`eje3_id_eje` AS Aprendizaje_eje3_id_eje,
+     Unidad.`Numero_Unidad` AS Unidad_Numero_Unidad,
+     Actividad.`Id_Actividad` AS Actividad_Id_Actividad,
+     Actividad.`Actividad` AS Actividad_Actividad,
+     Actividad.`Fecha` AS Actividad_Fecha,
+     Actividad.`Tipo_Actividad_Id_Tipo_Actividad` AS Actividad_Tipo_Actividad_Id_Tipo_Actividad,
+     Actividad.`Tipo_Valoracion_Id_Tipo_Valoracion` AS Actividad_Tipo_Valoracion_Id_Tipo_Valoracion,
+     Actividad.`Tipo_Desempeno_Id_Tipo_Desempeno` AS Actividad_Tipo_Desempeno_Id_Tipo_Desempeno,
+     Actividad.`Requerido_Alternativo` AS Actividad_Requerido_Alternativo,
+     Actividad.`Subtopico_Id_Subtopico` AS Actividad_Subtopico_Id_Subtopico,
+     Nivel.`Id_Nivel` AS Nivel_Id_Nivel,
+     Nivel.`Nivel` AS Nivel_Nivel,
+     Dimension_Comprension.`Id_Dimension` AS Dimension_Comprension_Id_Dimension,
+     Dimension_Comprension.`Dimension_Comprension` AS Dimension_Comprension_Dimension_Comprension,
+     Dimension_Curricular.`Id_Dimension` AS Dimension_Curricular_Id_Dimension,
+     Dimension_Curricular.`Dimension_Curricular` AS Dimension_Curricular_Dimension_Curricular,
+     Tipo_Actividad.`Id_Tipo_Actividad` AS Tipo_Actividad_Id_Tipo_Actividad,
+     Tipo_Actividad.`Tipo_Actividad` AS Tipo_Actividad_Tipo_Actividad,
+     Tipo_Desempeno.`Id_Tipo_Desempeno` AS Tipo_Desempeno_Id_Tipo_Desempeno,
+     Tipo_Desempeno.`Tipo_Desempeno` AS Tipo_Desempeno_Tipo_Desempeno,
+     Tipo_Valoracion.`Id_Tipo_Valoracion` AS Tipo_Valoracion_Id_Tipo_Valoracion,
+     Tipo_Valoracion.`Tipo_Valoracion` AS Tipo_Valoracion_Tipo_Valoracion
+FROM
+     `Grado` Grado INNER JOIN `Curso` Curso ON Grado.`Id_Grado` = Curso.`Grado_Id_Grado`
+     INNER JOIN `asignatura` asignatura ON Grado.`Id_Grado` = asignatura.`Grado_Id_Grado`
+     INNER JOIN `Nivel` Nivel ON Grado.`Nivel_Id_Nivel` = Nivel.`Id_Nivel`
+     INNER JOIN `SY` SY ON asignatura.`SY_Id_SY` = SY.`Id_SY`
+     INNER JOIN `Unidad` Unidad ON asignatura.`Id_Asignatura` = Unidad.`Asignatura_Id_Asignatura`
+     INNER JOIN `Subtopico` Subtopico ON Unidad.`Id_Unidad` = Subtopico.`Unidad_Id_Unidad`
+     INNER JOIN `Aprendizaje` Aprendizaje ON Subtopico.`Id_Subtopico` = Aprendizaje.`Subtopico_Id_Subtopico`
+     INNER JOIN `Actividad` Actividad ON Subtopico.`Id_Subtopico` = Actividad.`Subtopico_Id_Subtopico`
+     INNER JOIN `Tipo_Actividad` Tipo_Actividad ON Actividad.`Tipo_Actividad_Id_Tipo_Actividad` = Tipo_Actividad.`Id_Tipo_Actividad`
+     INNER JOIN `Tipo_Desempeno` Tipo_Desempeno ON Actividad.`Tipo_Desempeno_Id_Tipo_Desempeno` = Tipo_Desempeno.`Id_Tipo_Desempeno`
+     INNER JOIN `Tipo_Valoracion` Tipo_Valoracion ON Actividad.`Tipo_Valoracion_Id_Tipo_Valoracion` = Tipo_Valoracion.`Id_Tipo_Valoracion`
+     INNER JOIN `Dimension_Comprension` Dimension_Comprension ON Aprendizaje.`Dimension_Comprension_Id_Dimension` = Dimension_Comprension.`Id_Dimension`
+     INNER JOIN `Dimension_Curricular` Dimension_Curricular ON Aprendizaje.`Dimension_Curricular_Id_Dimension` = Dimension_Curricular.`Id_Dimension`
+WHERE
+     asignatura.`SY_Id_SY` = $P{idSY}
+ AND Grado.`Id_Grado` = $P{idGR}]]>
+	</queryString>
+	<field name="SY_Id_SY" class="java.lang.Integer"/>
+	<field name="SY_School_year" class="java.lang.String"/>
+	<field name="Grado_Id_Grado" class="java.lang.Integer"/>
+	<field name="Grado_Grado" class="java.lang.String"/>
+	<field name="Curso_Id_Curso" class="java.lang.Integer"/>
+	<field name="Curso_Curso" class="java.lang.String"/>
+	<field name="Curso_Grado_Id_Grado" class="java.lang.Integer"/>
+	<field name="asignatura_Id_Asignatura" class="java.lang.Integer"/>
+	<field name="asignatura_Asignatura" class="java.lang.String"/>
+	<field name="asignatura_Subject" class="java.lang.String"/>
+	<field name="asignatura_Grado_Id_Grado" class="java.lang.Integer"/>
+	<field name="asignatura_SY_Id_SY" class="java.lang.Integer"/>
+	<field name="Unidad_Id_Unidad" class="java.lang.Integer"/>
+	<field name="Unidad_Unidad" class="java.lang.String"/>
+	<field name="Unidad_Unit" class="java.lang.String"/>
+	<field name="Unidad_Fecha_Inicio" class="java.sql.Date"/>
+	<field name="Unidad_Fecha_Fin" class="java.sql.Date"/>
+	<field name="Unidad_Asignatura_Id_Asignatura" class="java.lang.Integer"/>
+	<field name="Subtopico_Id_Subtopico" class="java.lang.Integer"/>
+	<field name="Subtopico_Subtopico" class="java.lang.String"/>
+	<field name="Subtopico_Unidad_Id_Unidad" class="java.lang.Integer"/>
+	<field name="Subtopico_Fecha_inicio" class="java.sql.Date"/>
+	<field name="Subtopico_Fecha_Fin" class="java.sql.Date"/>
+	<field name="Subtopico_Subtopic" class="java.lang.String"/>
+	<field name="Subtopico_Numero_Subtopico" class="java.lang.Integer"/>
+	<field name="Aprendizaje_Id_Aprendizaje" class="java.lang.Integer"/>
+	<field name="Aprendizaje_Fecha_Esperada" class="java.sql.Date"/>
+	<field name="Aprendizaje_Aprendizaje" class="java.lang.String"/>
+	<field name="Aprendizaje_Learning" class="java.lang.String"/>
+	<field name="Aprendizaje_Peso" class="java.lang.Integer"/>
+	<field name="Aprendizaje_Dimension_Comprension_Id_Dimension" class="java.lang.Integer"/>
+	<field name="Aprendizaje_Inteligencia_Id_Inteligencia" class="java.lang.Integer"/>
+	<field name="Aprendizaje_Nivel_Esperado_Id_Nivel_Esperado" class="java.lang.Integer"/>
+	<field name="Aprendizaje_Dimension_Curricular_Id_Dimension" class="java.lang.Integer"/>
+	<field name="Aprendizaje_Eje_Id_Eje" class="java.lang.Integer"/>
+	<field name="Aprendizaje_Subtopico_Id_Subtopico" class="java.lang.Integer"/>
+	<field name="Aprendizaje_eje2_id_eje" class="java.lang.Integer"/>
+	<field name="Aprendizaje_eje3_id_eje" class="java.lang.Integer"/>
+	<field name="Unidad_Numero_Unidad" class="java.lang.Integer"/>
+	<field name="Actividad_Id_Actividad" class="java.lang.Integer"/>
+	<field name="Actividad_Actividad" class="java.lang.String"/>
+	<field name="Actividad_Fecha" class="java.sql.Date"/>
+	<field name="Actividad_Tipo_Actividad_Id_Tipo_Actividad" class="java.lang.Integer"/>
+	<field name="Actividad_Tipo_Valoracion_Id_Tipo_Valoracion" class="java.lang.Integer"/>
+	<field name="Actividad_Tipo_Desempeno_Id_Tipo_Desempeno" class="java.lang.Integer"/>
+	<field name="Actividad_Requerido_Alternativo" class="java.lang.Boolean"/>
+	<field name="Actividad_Subtopico_Id_Subtopico" class="java.lang.Integer"/>
+	<field name="Nivel_Id_Nivel" class="java.lang.Integer"/>
+	<field name="Nivel_Nivel" class="java.lang.String"/>
+	<field name="Dimension_Comprension_Id_Dimension" class="java.lang.Integer"/>
+	<field name="Dimension_Comprension_Dimension_Comprension" class="java.lang.String"/>
+	<field name="Dimension_Curricular_Id_Dimension" class="java.lang.Integer"/>
+	<field name="Dimension_Curricular_Dimension_Curricular" class="java.lang.String"/>
+	<field name="Tipo_Actividad_Id_Tipo_Actividad" class="java.lang.Integer"/>
+	<field name="Tipo_Actividad_Tipo_Actividad" class="java.lang.String"/>
+	<field name="Tipo_Desempeno_Id_Tipo_Desempeno" class="java.lang.Integer"/>
+	<field name="Tipo_Desempeno_Tipo_Desempeno" class="java.lang.String"/>
+	<field name="Tipo_Valoracion_Id_Tipo_Valoracion" class="java.lang.Integer"/>
+	<field name="Tipo_Valoracion_Tipo_Valoracion" class="java.lang.String"/>
+	<group name="asignatura_Id_Asignatura">
+		<groupExpression><![CDATA[$F{asignatura_Id_Asignatura}]]></groupExpression>
+		<groupHeader>
+			<band height="18">
+				<frame>
+					<reportElement mode="Opaque" x="0" y="0" width="802" height="18" forecolor="#B89F7D" backcolor="#0099FF"/>
+					<textField isBlankWhenNull="true">
+						<reportElement x="52" y="0" width="664" height="16" forecolor="#FFFFFF"/>
+						<textElement verticalAlignment="Top">
+							<font fontName="Arial" size="13"/>
+						</textElement>
+						<textFieldExpression class="java.lang.String"><![CDATA[$F{asignatura_Asignatura}+ " | "+$F{asignatura_Subject}]]></textFieldExpression>
+					</textField>
+				</frame>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="SubTitle" x="0" y="0" width="52" height="16" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial" size="13" isBold="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Integer"><![CDATA[$F{asignatura_Id_Asignatura}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="1"/>
+		</groupFooter>
+	</group>
+	<group name="Unidad_Id_Unidad">
+		<groupExpression><![CDATA[$F{Unidad_Id_Unidad}]]></groupExpression>
+		<groupHeader>
+			<band height="25">
+				<rectangle radius="2">
+					<reportElement x="34" y="1" width="768" height="24" backcolor="#7BBAF9"/>
+					<graphicElement>
+						<pen lineWidth="0.0"/>
+					</graphicElement>
+				</rectangle>
+				<textField>
+					<reportElement x="89" y="1" width="466" height="17"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial" size="12"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{Unidad_Unidad}+ " | "+$F{Unidad_Unit}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement positionType="Float" x="35" y="1" width="54" height="17" forecolor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial" size="12" isBold="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Integer"><![CDATA[$F{Unidad_Id_Unidad}]]></textFieldExpression>
+				</textField>
+				<textField pattern="yyyy/MM/dd">
+					<reportElement x="594" y="11" width="83" height="13"/>
+					<textElement/>
+					<textFieldExpression class="java.util.Date"><![CDATA[$F{Unidad_Fecha_Inicio}]]></textFieldExpression>
+				</textField>
+				<textField pattern="yyyy/MM/dd">
+					<reportElement x="677" y="12" width="102" height="13"/>
+					<textElement/>
+					<textFieldExpression class="java.util.Date"><![CDATA[$F{Unidad_Fecha_Fin}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="594" y="2" width="185" height="10"/>
+					<textElement>
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Fecha Inicio              Fecha fin]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="Subtopico_Id_Subtopico">
+		<groupExpression><![CDATA[$F{Subtopico_Id_Subtopico}]]></groupExpression>
+	</group>
+	<group name="Aprendizaje_Id_Aprendizaje">
+		<groupExpression><![CDATA[$F{Aprendizaje_Id_Aprendizaje}]]></groupExpression>
+	</group>
+	<group name="Subtopico_id_Subtopico">
+		<groupExpression><![CDATA[$F{Subtopico_Id_Subtopico}]]></groupExpression>
+		<groupHeader>
+			<band height="22">
+				<rectangle radius="2">
+					<reportElement x="60" y="1" width="742" height="20" backcolor="#92CEF6"/>
+					<graphicElement>
+						<pen lineWidth="0.0"/>
+					</graphicElement>
+				</rectangle>
+				<textField>
+					<reportElement x="120" y="0" width="456" height="20"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial" size="11" isBold="false" isItalic="false" isUnderline="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{Subtopico_Subtopico}+" | "+$F{Subtopico_Subtopic}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="63" y="1" width="53" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial" size="11" isBold="false" isItalic="false" isUnderline="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Integer"><![CDATA[$F{Subtopico_Id_Subtopico}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="594" y="0" width="185" height="10"/>
+					<textElement>
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Fecha Inicio               Fecha fin]]></text>
+				</staticText>
+				<textField pattern="yyyy/MM/dd">
+					<reportElement x="594" y="10" width="83" height="11"/>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression class="java.util.Date"><![CDATA[$F{Subtopico_Fecha_inicio}]]></textFieldExpression>
+				</textField>
+				<textField pattern="yyyy/MM/dd">
+					<reportElement x="679" y="10" width="100" height="10"/>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression class="java.util.Date"><![CDATA[$F{Subtopico_Fecha_Fin}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="51" y="0" width="1" height="22"/>
+					<graphicElement>
+						<pen lineWidth="0.75" lineStyle="Solid" lineColor="#333333"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="52" y="10" width="8" height="1"/>
+					<graphicElement>
+						<pen lineWidth="0.75" lineColor="#333333"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="17" y="0" width="1" height="22"/>
+					<graphicElement>
+						<pen lineWidth="1.25" lineStyle="Solid" lineColor="#333333"/>
+					</graphicElement>
+				</line>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="0" y="63" width="802" height="15" forecolor="#000000" backcolor="#CC0000"/>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement x="630" y="1" width="167" height="13" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Center">
+						<font size="10"/>
+					</textElement>
+					<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+			<image hAlign="Center">
+				<reportElement x="630" y="-2" width="182" height="63"/>
+				<imageExpression class="java.lang.String"><![CDATA["LOGO APRENDOZ.jpg"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="118" y="16" width="476" height="31"/>
+				<textElement textAlignment="Center">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[" PLAN DE ESTUDIOS DEL PERIODO ESCOLAR: "+ $F{SY_School_year}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="75" splitType="Stretch">
+			<rectangle>
+				<reportElement x="141" y="24" width="414" height="48"/>
+			</rectangle>
+			<line>
+				<reportElement x="141" y="39" width="414" height="1"/>
+			</line>
+			<line>
+				<reportElement x="141" y="56" width="414" height="1"/>
+			</line>
+			<line>
+				<reportElement x="271" y="24" width="1" height="48"/>
+			</line>
+			<textField>
+				<reportElement x="94" y="0" width="47" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{Aprendizaje_Id_Aprendizaje}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="141" y="0" width="489" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Aprendizaje_Aprendizaje}+ "     *"+$F{Aprendizaje_Learning}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="713" y="0" width="85" height="11"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{Aprendizaje_Fecha_Esperada}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="643" y="0" width="70" height="10"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha Esperada]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="141" y="24" width="130" height="15"/>
+				<textElement/>
+				<text><![CDATA[Nivel]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="272" y="24" width="283" height="16"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Nivel_Nivel}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="141" y="40" width="130" height="16"/>
+				<textElement/>
+				<text><![CDATA[Dimensión curricular]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="272" y="40" width="283" height="16"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Dimension_Curricular_Dimension_Curricular}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="141" y="56" width="130" height="16"/>
+				<textElement/>
+				<text><![CDATA[Dimension Comprensión]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="272" y="57" width="283" height="15"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Dimension_Comprension_Dimension_Comprension}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="88" y="1" width="1" height="74"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineStyle="Dashed" lineColor="#333333"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="51" y="0" width="1" height="75"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineStyle="Solid" lineColor="#333333"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="17" y="0" width="1" height="75"/>
+				<graphicElement>
+					<pen lineWidth="1.25" lineStyle="Solid" lineColor="#333333"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="17" y="-47" width="1" height="25"/>
+				<graphicElement>
+					<pen lineWidth="1.25" lineStyle="Solid" lineColor="#333333"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="94" y="19" width="47" height="1"/>
+				<graphicElement>
+					<pen lineWidth="1.25"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="115" y="20" width="1" height="55"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineStyle="Dotted" lineColor="#333333"/>
+				</graphicElement>
+			</line>
+		</band>
+		<band height="20">
+			<textField>
+				<reportElement x="131" y="0" width="40" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{Actividad_Id_Actividad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="171" y="0" width="297" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Actividad_Actividad}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="88" y="0" width="1" height="20"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineStyle="Dashed" lineColor="#333333"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="51" y="0" width="1" height="20"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineStyle="Solid" lineColor="#333333"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="17" y="0" width="1" height="20"/>
+				<graphicElement>
+					<pen lineWidth="1.25" lineStyle="Solid" lineColor="#333333"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="115" y="1" width="1" height="9"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineStyle="Dotted" lineColor="#333333"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="115" y="9" width="13" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineStyle="Dotted" lineColor="#333333"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="560" y="1" width="60" height="10"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Tipo actividad]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="560" y="11" width="60" height="9"/>
+				<textElement textAlignment="Center">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Tipo_Actividad_Tipo_Actividad}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="620" y="1" width="70" height="10"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Tipo desempeño]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="690" y="1" width="72" height="10"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Tipo valoración]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="620" y="11" width="70" height="9"/>
+				<textElement textAlignment="Center">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Tipo_Desempeno_Tipo_Desempeno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="690" y="10" width="72" height="10"/>
+				<textElement textAlignment="Center">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Tipo_Valoracion_Tipo_Valoracion}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="10" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="25" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="0" y="0" width="802" height="25" forecolor="#D0B48E" backcolor="#000000"/>
+				<textField evaluationTime="Report">
+					<reportElement style="Column header" x="757" y="3" width="40" height="20" forecolor="#FFFFFF"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial" size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Column header" x="677" y="3" width="80" height="20" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Pagina "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+				</textField>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement style="Column header" x="2" y="3" width="197" height="20" forecolor="#FFFFFF"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial" size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="199" y="3" width="362" height="20" forecolor="#FFFFFF"/>
+					<textElement verticalAlignment="Middle"/>
+					<text><![CDATA[©Derechos Reservados de Reproducción del Colegio Rochester]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

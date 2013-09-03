@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporte_317" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="periodo" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="numero_asig" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     PERSONA.`Apellido1` AS PERSONA_Apellido1,
+     PERSONA.`Apellido2` AS PERSONA_Apellido2,
+     PERSONA.`Nombre1` AS PERSONA_Nombre1,
+     PERSONA.`Nombre2` AS PERSONA_Nombre2,
+     Curso.`Curso` AS Curso_Curso,
+     Insc_Alum_Asig.`Calificacion` AS Insc_Alum_Asig_Calificacion,
+     Insc_Alum_Asig.`calif_char` AS Insc_Alum_Asig_calif_char,
+     asignatura.`Asignatura` AS asignatura_Asignatura,
+     PERSONA.`Id_Persona` AS PERSONA_Id_Persona
+FROM
+     `PERSONA` PERSONA INNER JOIN `Insc_Alum_Asig` Insc_Alum_Asig ON PERSONA.`Id_Persona` = Insc_Alum_Asig.`Persona_Id_Persona`
+     INNER JOIN `Insc_Alum_Curso` Insc_Alum_Curso ON PERSONA.`Id_Persona` = Insc_Alum_Curso.`Persona_Id_Persona`
+     INNER JOIN `Curso` Curso ON Insc_Alum_Curso.`Curso_Id_Curso` = Curso.`Id_Curso`
+     INNER JOIN `SY` SY ON Insc_Alum_Curso.`SY_Id_SY` = SY.`Id_SY`
+     INNER JOIN `Periodo` Periodo ON SY.`Id_SY` = Periodo.`SY_Id_SY`
+     INNER JOIN `asignatura` asignatura ON SY.`Id_SY` = asignatura.`SY_Id_SY`
+     AND Insc_Alum_Asig.`Asignatura_Id_Asignatura` = asignatura.`Id_Asignatura`
+     AND Periodo.`Id_Periodo` = Insc_Alum_Asig.`Periodo_Id_Periodo`
+WHERE
+     Insc_Alum_Asig.Periodo_Id_Periodo = $P{periodo} and( SELECT pierde_numero_asignaturas(PERSONA.Id_Persona,$P{numero_asig},$P{periodo}))
+ORDER BY
+     Curso.Id_Curso ASC,
+     PERSONA.`Apellido1` ASC,
+     PERSONA.`Apellido2` ASC,
+     PERSONA.`Nombre1` ASC,
+     PERSONA.`Nombre2` ASC]]>
+	</queryString>
+	<field name="PERSONA_Apellido1" class="java.lang.String"/>
+	<field name="PERSONA_Apellido2" class="java.lang.String"/>
+	<field name="PERSONA_Nombre1" class="java.lang.String"/>
+	<field name="PERSONA_Nombre2" class="java.lang.String"/>
+	<field name="Curso_Curso" class="java.lang.String"/>
+	<field name="Insc_Alum_Asig_Calificacion" class="java.math.BigDecimal"/>
+	<field name="Insc_Alum_Asig_calif_char" class="java.lang.String"/>
+	<field name="asignatura_Asignatura" class="java.lang.String"/>
+	<field name="PERSONA_Id_Persona" class="java.lang.Integer"/>
+	<group name="curso_group" isStartNewPage="true">
+		<groupExpression><![CDATA[$F{Curso_Curso}]]></groupExpression>
+		<groupHeader>
+			<band height="24">
+				<textField>
+					<reportElement x="454" y="4" width="100" height="20" forecolor="#CC0000"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{Curso_Curso}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<group name="persona_group">
+		<groupExpression><![CDATA[$F{PERSONA_Id_Persona}]]></groupExpression>
+		<groupHeader>
+			<band height="45">
+				<staticText>
+					<reportElement x="323" y="22" width="93" height="20" forecolor="#3333FF"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[PUNTAJE]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="443" y="22" width="93" height="20" forecolor="#3333FF"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[CALIFICACIÓN]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="45" y="22" width="250" height="20"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[ASIGNATURA]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="0" y="0" width="416" height="20"/>
+					<textElement>
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{PERSONA_Apellido1}+" "+$F{PERSONA_Apellido2}+" "+$F{PERSONA_Nombre1}+" "+$F{PERSONA_Nombre2}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="171" y="41" width="220" height="20"/>
+				<textElement/>
+				<text><![CDATA[Este reporte lista los estudiantes que tienen ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="393" y="41" width="17" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$P{numero_asig}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="410" y="41" width="144" height="20"/>
+				<textElement/>
+				<text><![CDATA[o más asignaturas en BAJO.]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement x="323" y="0" width="93" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{Insc_Alum_Asig_Calificacion}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="443" y="0" width="93" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Insc_Alum_Asig_calif_char}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="45" y="0" width="250" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{asignatura_Asignatura}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="431" y="0" width="1" height="20"/>
+			</line>
+			<line>
+				<reportElement x="45" y="20" width="510" height="1"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

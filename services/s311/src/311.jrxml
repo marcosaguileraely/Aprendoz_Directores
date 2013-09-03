@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="311" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="sy" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     PERSONA.`Codigo` AS PERSONA_Codigo,
+     PERSONA.`Apellido1` AS PERSONA_Apellido1,
+     PERSONA.`Apellido2` AS PERSONA_Apellido2,
+     PERSONA.`Nombre1` AS PERSONA_Nombre1,
+     PERSONA.`Nombre2` AS PERSONA_Nombre2,
+     PERSONA.`Activo_Retirado` AS PERSONA_Activo_Retirado,
+     PERSONA.`Fecha_Retiro` AS PERSONA_Fecha_Retiro,
+     PERSONA.`Tipo_Persona_Id_Tipo_Persona` AS PERSONA_Tipo_Persona_Id_Tipo_Persona,
+     PERSONA.`comentario_retiro` AS PERSONA_comentario_retiro,
+     Insc_Alum_Curso.`Id_Insc_Alum_Curso` AS Insc_Alum_Curso_Id_Insc_Alum_Curso,
+     Insc_Alum_Curso.`Curso_Id_Curso` AS Insc_Alum_Curso_Curso_Id_Curso,
+     Insc_Alum_Curso.`Persona_Id_Persona` AS Insc_Alum_Curso_Persona_Id_Persona,
+     Insc_Alum_Curso.`SY_Id_SY` AS Insc_Alum_Curso_SY_Id_SY,
+     Insc_Alum_Curso.`Calificacion` AS Insc_Alum_Curso_Calificacion,
+     Insc_Alum_Curso.`calif_char` AS Insc_Alum_Curso_calif_char,
+     Insc_Alum_Curso.`fecha_matricula` AS Insc_Alum_Curso_fecha_matricula,
+     SY.`Id_SY` AS SY_Id_SY,
+     SY.`School_year` AS SY_School_year
+FROM
+     `PERSONA` PERSONA INNER JOIN `Insc_Alum_Curso` Insc_Alum_Curso ON PERSONA.`Id_Persona` = Insc_Alum_Curso.`Persona_Id_Persona`
+     INNER JOIN `SY` SY ON Insc_Alum_Curso.`SY_Id_SY` = SY.`Id_SY`
+WHERE
+     PERSONA.`Activo_Retirado` = 0
+ AND PERSONA.`Tipo_Persona_Id_Tipo_Persona` = 1
+ AND Insc_Alum_Curso.`SY_Id_SY` = $P{sy}]]>
+	</queryString>
+	<field name="PERSONA_Codigo" class="java.lang.String"/>
+	<field name="PERSONA_Apellido1" class="java.lang.String"/>
+	<field name="PERSONA_Apellido2" class="java.lang.String"/>
+	<field name="PERSONA_Nombre1" class="java.lang.String"/>
+	<field name="PERSONA_Nombre2" class="java.lang.String"/>
+	<field name="PERSONA_Activo_Retirado" class="java.lang.Boolean"/>
+	<field name="PERSONA_Fecha_Retiro" class="java.sql.Date"/>
+	<field name="PERSONA_Tipo_Persona_Id_Tipo_Persona" class="java.lang.Integer"/>
+	<field name="PERSONA_comentario_retiro" class="java.lang.String"/>
+	<field name="Insc_Alum_Curso_Id_Insc_Alum_Curso" class="java.lang.Integer"/>
+	<field name="Insc_Alum_Curso_Curso_Id_Curso" class="java.lang.Integer"/>
+	<field name="Insc_Alum_Curso_Persona_Id_Persona" class="java.lang.Integer"/>
+	<field name="Insc_Alum_Curso_SY_Id_SY" class="java.lang.Integer"/>
+	<field name="Insc_Alum_Curso_Calificacion" class="java.lang.Integer"/>
+	<field name="Insc_Alum_Curso_calif_char" class="java.lang.String"/>
+	<field name="Insc_Alum_Curso_fecha_matricula" class="java.sql.Timestamp"/>
+	<field name="SY_Id_SY" class="java.lang.Integer"/>
+	<field name="SY_School_year" class="java.lang.String"/>
+	<variable name="PERSONA_Codigo_1" class="java.lang.Integer" resetType="Column" calculation="Count">
+		<variableExpression><![CDATA[$F{PERSONA_Codigo}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="96" splitType="Stretch">
+			<image>
+				<reportElement x="403" y="2" width="152" height="68"/>
+				<imageExpression class="java.lang.String"><![CDATA["logo.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="88" y="21" width="315" height="49"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ALUMNOS RETIRADOS]]></text>
+			</staticText>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="403" y="70" width="152" height="15"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="88" y="70" width="315" height="15"/>
+				<textElement textAlignment="Center">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["AÑO ESCOLAR: "+$F{SY_School_year}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="22" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="1" width="49" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Código]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="49" y="1" width="239" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombres y Apellidos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="391" y="1" width="164" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Comentario y/o razon de retiro]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="307" y="1" width="65" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha Retiro]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="35" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="49" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{PERSONA_Codigo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="49" y="0" width="239" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{PERSONA_Apellido1}+" "+$F{PERSONA_Apellido2}+" "+$F{PERSONA_Nombre1}+" "+$F{PERSONA_Nombre2}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="34" width="555" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineStyle="Dotted" lineColor="#0000CC"/>
+				</graphicElement>
+			</line>
+			<textField pattern="yyyy/MM/dd" isBlankWhenNull="true">
+				<reportElement x="307" y="0" width="65" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{PERSONA_Fecha_Retiro}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="391" y="0" width="164" height="35"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[($F{PERSONA_comentario_retiro} != null ? $F{PERSONA_comentario_retiro}: "Se espera comentario")]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<lastPageFooter>
+		<band height="14">
+			<textField>
+				<reportElement x="521" y="0" width="34" height="14"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="391" y="0" width="124" height="14"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Retirados]]></text>
+			</staticText>
+		</band>
+	</lastPageFooter>
+</jasperReport>
